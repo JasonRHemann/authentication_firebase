@@ -2,6 +2,7 @@ import React from "react";
 import Signup from "./Signup";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import Table from "./Table";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPasssord";
 import UpdateProfile from "./UpdateProfile";
@@ -21,6 +22,7 @@ function App() {
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              <PrivateRoute path="/table" component={Table} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
