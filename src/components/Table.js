@@ -8,7 +8,10 @@ export default function Table() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [chips, setChips] = useState(0);
+  const [chips, setChips] = useState(10000);
+  const [sitting, setSitting] = useState(false);
+
+  console.log(sitting);
 
   //this is coming from firebase auth not the database
   const { currentUser, logout } = useAuth();
@@ -68,28 +71,20 @@ export default function Table() {
     <div>
       <h2>Table</h2>
 
-      <input
-        type="text"
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <textarea onChange={(e) => setChips(e.target.value)}></textarea>
       <button
-        onClick={() =>
-          addPlayer({ name: currentUser.email, chips, id: uuidv4() })
-        }
+        onClick={() => {
+          addPlayer({ name: currentUser.email, chips, id: uuidv4() });
+        }}
       >
-        Add Player
+        Sit Here
       </button>
       {players.map((player) => (
         <div key={player.id}>
-          <div border="1px solid red">
-            <h2>
-              {player.name}_{player.chips}
-            </h2>
-            <button onClick={() => deletePlayer(player)}>X</button>
-            <button onClick={() => editPlayer({ name })}>Edit</button>
+          <h2>
+            {player.name}_{player.chips}
+          </h2>
+          <div>
+            <button onClick={() => deletePlayer(player)}>Stand Up</button>
           </div>
         </div>
       ))}
