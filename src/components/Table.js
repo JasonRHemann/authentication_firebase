@@ -10,6 +10,7 @@ export default function Table() {
   const [name, setName] = useState("");
   const [chips, setChips] = useState(10000);
   const [sitting, setSitting] = useState(false);
+  const [hide, setHide] = useState("");
 
   console.log(sitting);
 
@@ -67,13 +68,25 @@ export default function Table() {
     return <h1>Loading...</h1>;
   }
 
+  //SHOW OR HIDE SIT BUTTONS
+
   return (
     <div>
-      <h2>Table</h2>
-
       <button
+        style={{ display: hide }}
         onClick={() => {
           addPlayer({ name: currentUser.email, chips, id: uuidv4() });
+          setHide("none");
+        }}
+      >
+        Sit Here
+      </button>
+      <hr></hr>
+      <button
+        style={{ display: hide }}
+        onClick={() => {
+          addPlayer({ name: currentUser.email, chips, id: uuidv4() });
+          setHide("none");
         }}
       >
         Sit Here
@@ -81,10 +94,17 @@ export default function Table() {
       {players.map((player) => (
         <div key={player.id}>
           <h2>
-            {player.name}_{player.chips}
+            {player.name}_{player.chips}_{player.id}
           </h2>
           <div>
-            <button onClick={() => deletePlayer(player)}>Stand Up</button>
+            <button
+              onClick={() => {
+                deletePlayer(player);
+                setHide("block");
+              }}
+            >
+              Stand Up
+            </button>
           </div>
         </div>
       ))}
