@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import { useAuth } from "../context/AuthContext";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
+
+const Background = styled.div`
+  background: aqua;
+  width: 100vw;
+  height: 100vh;
+  border: 13px solid purple;
+`;
 
 export default function Table() {
   //Set state for players and loading
@@ -11,6 +19,9 @@ export default function Table() {
   const [chips, setChips] = useState(10000);
   const [sitting, setSitting] = useState(false);
   const [hide, setHide] = useState("");
+  const [seat, setSeats] = useState(2);
+
+  function randomSeat() {}
 
   console.log(sitting);
 
@@ -62,6 +73,7 @@ export default function Table() {
 
   useEffect(() => {
     getPlayers();
+    console.log(players);
   }, []);
 
   if (loading) {
@@ -71,11 +83,11 @@ export default function Table() {
   //SHOW OR HIDE SIT BUTTONS
 
   return (
-    <div>
+    <Background>
       <button
         style={{ display: hide }}
         onClick={() => {
-          addPlayer({ name: currentUser.email, chips, id: uuidv4() });
+          addPlayer({ name: currentUser.email, chips, id: uuidv4(), seat });
           setHide("none");
         }}
       >
@@ -108,6 +120,6 @@ export default function Table() {
           </div>
         </div>
       ))}
-    </div>
+    </Background>
   );
 }
