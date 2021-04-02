@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import { useAuth } from "../context/AuthContext";
 import { v4 as uuidv4 } from "uuid";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import Container from "react-bootstrap/Container";
+import "./Table.scss";
 
 export default function Table() {
   //Set state for players and loading
@@ -71,41 +74,12 @@ export default function Table() {
   //SHOW OR HIDE SIT BUTTONS
 
   return (
-    <div>
-      <button
-        style={{ display: hide }}
-        onClick={() => {
-          addPlayer({ name: currentUser.email, chips, id: uuidv4() });
-          setHide("none");
-        }}
-      >
-        Sit Here
-      </button>
-      <hr></hr>
-      <button
-        style={{ display: hide }}
-        onClick={() => {
-          addPlayer({ name: currentUser.email, chips, id: uuidv4() });
-          setHide("none");
-        }}
-      >
-        Sit Here
-      </button>
+    <div className="table-layout">
       {players.map((player) => (
         <div key={player.id}>
           <h2>
             {player.name}_{player.chips}_{player.id}
           </h2>
-          <div>
-            <button
-              onClick={() => {
-                deletePlayer(player);
-                setHide("block");
-              }}
-            >
-              Stand Up
-            </button>
-          </div>
         </div>
       ))}
     </div>
