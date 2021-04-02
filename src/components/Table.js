@@ -14,6 +14,9 @@ export default function Table() {
   const [chips, setChips] = useState(10000);
   const [sitting, setSitting] = useState(false);
   const [hide, setHide] = useState("");
+  const [seat, setSeats] = useState(2);
+
+  function randomSeat() {}
 
   console.log(sitting);
 
@@ -65,6 +68,7 @@ export default function Table() {
 
   useEffect(() => {
     getPlayers();
+    console.log(players);
   }, []);
 
   if (loading) {
@@ -78,7 +82,7 @@ export default function Table() {
       {players.map((player) => (
         <div key={player.id}>
           <h2>
-            {player.name}_{player.chips}_{player.id}
+            {player.name}_{player.chips}
           </h2>
         </div>
       ))}
